@@ -1,7 +1,9 @@
 <?php 
+
     $json_file = 'users.json';
 
     if ($json_file != null) {
+
         $json_data = file_get_contents($json_file);
         $data = json_decode($json_data, true);
 
@@ -25,8 +27,6 @@
         );
     
         $data[] = $newUser;
-    
-    
         $updated_data = json_encode($data, JSON_PRETTY_PRINT);
     
         if (file_put_contents($json_file, $updated_data)) {
@@ -38,7 +38,6 @@
         else {
             echo 'Failed to add a user';
         }
-    
     }
    
     else {
