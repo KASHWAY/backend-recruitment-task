@@ -5,9 +5,9 @@
     <meta name="author" content="Hubert Targosz">
 </head>
 <body>
-    <p id="demo"></p>
-    <table id="dataTable">
-        <thead>
+
+    <table id="dataTable" class="table table-striped table-dark">
+        <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -17,9 +17,11 @@
                 <th>Phone</th>
                 <th>Website</th>
                 <th>Company</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
+
         <?php
         
             $json_file = 'partials/users.json';
@@ -36,49 +38,46 @@
                 echo '<td>' . $user['phone'] . '</td>';
                 echo '<td>' . $user['website'] . '</td>';
                 echo '<td>' . $user['company']['name'] . '</td>';
-                echo '<td>'.'<button onclick="handleButtonClick(' .$index. ')">Remove <br> Button</button>'.'</td>';
+                echo '<td>'.'<button onclick="handleButtonClick(' .$index. ')" class="btn btn-secondary btn-lg">Remove <br> Button</button>'.'</td>';
                 echo '</tr>';
             }
 
         ?>
+
         </tbody>
     </table>
 
-    <h2>Add New User</h2>
-    <form action="partials/addUser.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required><br>
+    <h2>Add a new user.</h2>
+    <div class="formBox">
+       
+        <form action="partials/addUser.php" method="POST">
 
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
+        <?php
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
+            $formFields = array(
+                'name' => 'Name',
+                'username' => 'Username',
+                'email' => 'Email',
+                'street' => 'Street',
+                'suite' => 'Suite',
+                'city' => 'City',
+                'zipcode' => 'Zip Code',
+                'phone' => 'Phone',
+                'website' => 'Website',
+                'company' => 'Company'
+            );
 
-        <label for="street">Street:</label>
-        <input type="text" name="street" required><br>
+            foreach ($formFields as $fieldName => $label) {
+                echo '<label for="' . $fieldName . '">' . $label . ':</label>';
+                echo '<input type="text" name="' . $fieldName . '" required class="form-control"><br>';
+            }
+        ?>
 
-        <label for="suite">Suite:</label>
-        <input type="text" name="suite" required><br>
+        <input type="submit" value="Add User" class="btn btn-success">
+        </form>
 
-        <label for="city">City:</label>
-        <input type="text" name="city" required><br>
-
-        <label for="zipcode">Zip Code:</label>
-        <input type="text" name="zipcode" required><br>
-
-        <label for="phone">Phone:</label>
-        <input type="text" name="phone" required><br>
-
-        <label for="website">Website:</label>
-        <input type="text" name="website" required><br>
-
-        <label for="company">Company:</label>
-        <input type="text" name="company" required><br>
-
-        <input type="submit" value="Add User">
-    </form>
-
+    </div>
+    
     <script>
         function handleButtonClick(index) {
             var confirmation = confirm("Are you sure you want to remove this user?");
