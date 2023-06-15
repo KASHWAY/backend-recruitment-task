@@ -22,21 +22,21 @@
         <tbody>
         <?php
         
-            $json_file = './dataset/users.json';
+            $json_file = 'partials/users.json';
             $json_data = file_get_contents($json_file);
             $data = json_decode($json_data, true);
 
-            foreach ($data as $row) {
+            foreach ($data as $key => $user) {
                 echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
-                echo '<td>' . $row['name'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-                echo '<td>' . $row['email'] . '</td>';
-                echo '<td>' . $row['address']['street'] . ', ' . $row['address']['suite'] . ', ' . $row['address']['city'] . ', ' . $row['address']['zipcode'] . '</td>';
-                echo '<td>' . $row['phone'] . '</td>';
-                echo '<td>' . $row['website'] . '</td>';
-                echo '<td>' . $row['company']['name'] . '</td>';
-                echo '<td>'.'<button onclick="handleButtonClick(' .$row['id']. ')">Remove <br> Button</button>'.'</td>';
+                echo '<td>' . $user['id'] . '</td>';
+                echo '<td>' . $user['name'] . '</td>';
+                echo '<td>' . $user['username'] . '</td>';
+                echo '<td>' . $user['email'] . '</td>';
+                echo '<td>' . $user['address']['street'] . ', ' . $user['address']['suite'] . ', ' . $user['address']['city'] . ', ' . $user['address']['zipcode'] . '</td>';
+                echo '<td>' . $user['phone'] . '</td>';
+                echo '<td>' . $user['website'] . '</td>';
+                echo '<td>' . $user['company']['name'] . '</td>';
+                echo '<td>'.'<button onclick="handleButtonClick(' .$user['id']. ')">Remove <br> Button</button>'.'</td>';
                 echo '</tr>';
             }
 
@@ -44,18 +44,23 @@
         </tbody>
     </table>
     <script>
-        function handleButtonClick(rowId) {
-            console.log("Button clicked " + rowId);
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById("demo").innerHTML = this.responseText;
-                }
-            };
+       function handleButtonClick(index) {
+            var confirmation = confirm("Are you sure you want to remove this user?");
 
-            xhttp.open("GET", "./partials/removeData.php?id="+rowId , true);
-            xhttp.send();
+            if (confirmation) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        location.reload();
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+
+                xhttp.open("GET", "partials/removeData.php?index="+index, true);
+                xhttp.send();
+            }
         }
+
 
     </script>
 </body>
