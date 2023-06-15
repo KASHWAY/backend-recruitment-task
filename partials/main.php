@@ -26,9 +26,9 @@
             $json_data = file_get_contents($json_file);
             $data = json_decode($json_data, true);
 
-            foreach ($data as $key => $user) {
+            foreach ($data as $index => $user) {
                 echo '<tr>';
-                echo '<td>' . $user['id'] . '</td>';
+                echo '<td>' . ($index + 1) . '</td>';
                 echo '<td>' . $user['name'] . '</td>';
                 echo '<td>' . $user['username'] . '</td>';
                 echo '<td>' . $user['email'] . '</td>';
@@ -36,7 +36,7 @@
                 echo '<td>' . $user['phone'] . '</td>';
                 echo '<td>' . $user['website'] . '</td>';
                 echo '<td>' . $user['company']['name'] . '</td>';
-                echo '<td>'.'<button onclick="handleButtonClick(' .$user['id']. ')">Remove <br> Button</button>'.'</td>';
+                echo '<td>'.'<button onclick="handleButtonClick(' .$index. ')">Remove <br> Button</button>'.'</td>';
                 echo '</tr>';
             }
 
@@ -44,7 +44,7 @@
         </tbody>
     </table>
     <script>
-       function handleButtonClick(index) {
+        function handleButtonClick(index) {
             var confirmation = confirm("Are you sure you want to remove this user?");
 
             if (confirmation) {
@@ -52,15 +52,14 @@
                 xhttp.onreadystatechange = function() {
                     if (this.readyState === 4 && this.status === 200) {
                         location.reload();
-                        document.getElementById("demo").innerHTML = this.responseText;
+                        document.getElementById("demo") = this.responseText;
                     }
                 };
 
-                xhttp.open("GET", "partials/removeData.php?index="+index, true);
+                xhttp.open("GET", "partials/removeData.php?index=" + index, true);
                 xhttp.send();
             }
         }
-
 
     </script>
 </body>
