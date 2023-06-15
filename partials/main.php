@@ -79,6 +79,7 @@
     </div>
     
     <script>
+        
         function handleButtonClick(index) {
             var confirmation = confirm("Are you sure you want to remove this user?");
 
