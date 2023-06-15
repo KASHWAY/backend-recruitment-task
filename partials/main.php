@@ -43,6 +43,42 @@
         ?>
         </tbody>
     </table>
+
+    <h2>Add New User</h2>
+    <form action="partials/addUser.php" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br>
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label for="street">Street:</label>
+        <input type="text" name="street" required><br>
+
+        <label for="suite">Suite:</label>
+        <input type="text" name="suite" required><br>
+
+        <label for="city">City:</label>
+        <input type="text" name="city" required><br>
+
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" name="zipcode" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" required><br>
+
+        <label for="website">Website:</label>
+        <input type="text" name="website" required><br>
+
+        <label for="company">Company:</label>
+        <input type="text" name="company" required><br>
+
+        <input type="submit" value="Add User">
+    </form>
+
     <script>
         function handleButtonClick(index) {
             var confirmation = confirm("Are you sure you want to remove this user?");

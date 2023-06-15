@@ -15,4 +15,5 @@
     } else {
         echo "Invalid index or user not found.";
     }
+
 ?>
