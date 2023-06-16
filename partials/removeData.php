@@ -3,7 +3,7 @@
 
     $index = $_GET['index'];
     
-    $json_file = 'users.json';
+    $json_file = '../dataset/users.json';
     $json_data = file_get_contents($json_file);
     $data = json_decode($json_data, true);
 

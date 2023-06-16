@@ -1,6 +1,6 @@
 <?php 
 
-    $json_file = 'users.json';
+    $json_file = '../dataset/users.json';
 
     if ($json_file != null) {
 
